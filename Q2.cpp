@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <sstream>
 using namespace std;
 
 class Student {
@@ -9,7 +10,6 @@ private:
     string dept;
 
 public:
-    
     Student() {
         stdID = "";
         stdName = "";
@@ -32,7 +32,9 @@ public:
     }
 
     Student(int x, string name, string department) {
-        stdID = to_string(x);
+        stringstream ss;
+        ss << x;
+        stdID = ss.str();
         stdName = name;
         dept = department;
         cout << "Constructor 3 called" << endl;
@@ -43,18 +45,6 @@ public:
         stdName = obj.stdName;
         dept = obj.dept;
         cout << "Copy constructor called" << endl;
-    }
-
-    void inputData() {
-        cout << "Enter Student ID: ";
-        cin >> stdID;
-        cin.ignore();
-
-        cout << "Enter Student Name: ";
-        getline(cin, stdName);
-
-        cout << "Enter Department: ";
-        getline(cin, dept);
     }
 
     void displayData() {
@@ -70,31 +60,19 @@ public:
 };
 
 int main() {
-    
     Student obj1;
     Student obj2("12345", "Ali Hassan");
     Student obj3("23456", "Sheraz Depp", "Computer Science");
-
-    
     Student obj4(obj3);
 
-    cout << endl << "Displaying Static Objects:" << endl;
-    obj1.displayData();
-    obj2.displayData();
-    obj3.displayData();
-    obj4.displayData();
-
-    
     Student *d1 = new Student();
     Student *d2 = new Student("99999", "John Doe");
     Student *d3 = new Student(1, "Sarah Khan", "IT");
 
-    cout << endl << "Displaying Dynamic Objects:" << endl;
     d1->displayData();
     d2->displayData();
     d3->displayData();
 
-    
     delete d1;
     delete d2;
     delete d3;
